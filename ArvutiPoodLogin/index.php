@@ -2,6 +2,11 @@
 
 session_start();
 
+if (!isset($_SESSION["useruid"]) || $_SESSION["useruid"] !== "admin") {
+    //et kasutaja ei saaks lehele siseneda peale administraatori .viga 403
+    http_response_code(403); 
+    exit();
+}
 if(isset($_GET['code'])) {
     die(highlight_file(__FILE__, 1));
 }
